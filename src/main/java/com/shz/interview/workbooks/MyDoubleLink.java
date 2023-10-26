@@ -8,31 +8,31 @@ import java.util.Objects;
 /**
  * 
  */
-class ShzLink<T> {
+class MyDoubleLink<T> {
 
 	private T data;
 
-	private ShzLink<T> previous;
+	private MyDoubleLink<T> previous;
 
-	private ShzLink<T> next;
+	private MyDoubleLink<T> next;
 
-	public ShzLink(T data) {
+	public MyDoubleLink(T data) {
 		this.data = data;
 	}
 
-	public ShzLink<T> getPrevious() {
+	public MyDoubleLink<T> getPrevious() {
 		return previous;
 	}
 
-	public void setPrevious(ShzLink<T> previous) {
+	public void setPrevious(MyDoubleLink<T> previous) {
 		this.previous = previous;
 	}
 
-	ShzLink<T> getNext() {
+	MyDoubleLink<T> getNext() {
 		return next;
 	}
 
-	void setNext(ShzLink<T> next) {
+	void setNext(MyDoubleLink<T> next) {
 		this.next = next;
 	}
 
@@ -53,7 +53,7 @@ class ShzLink<T> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ShzLink other = (ShzLink) obj;
+		MyDoubleLink other = (MyDoubleLink) obj;
 		return Objects.equals(data, other.data) && Objects.equals(next, other.next) && Objects.equals(previous, other.previous);
 	}
 

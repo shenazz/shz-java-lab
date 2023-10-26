@@ -3,19 +3,37 @@
  */
 package com.shz.interview.workbooks;
 
+import java.util.Iterator;
+
 /**
- *  Doubly linked list
+ * Doubly linked list
  */
-public class ShzLinkedList<T> {
+public class MyDoubleLinkedList<T> implements Iterable<T> {
 
-	private ShzLink<T> first;
+	private MyDoubleLink<T> first;
 
-	private ShzLink<T> last;
+	private MyDoubleLink<T> last;
 
 	private int size;
 
 	public boolean isEmpty() {
 		return first == null;
+	}
+
+	public T getHead() {
+		T data = null;
+		if (!isEmpty()) {
+			data = first.getData();
+		}
+		return data;
+	}
+
+	public T getTail() {
+		T data = null;
+		if (!isEmpty()) {
+			data = last.getData();
+		}
+		return data;
 	}
 
 	//O(n)
@@ -30,7 +48,7 @@ public class ShzLinkedList<T> {
 			throw new RuntimeException("Out of bound!");
 		}
 
-		ShzLink<T> current = last;
+		MyDoubleLink<T> current = last;
 		int tracker = 0;
 		while (current != null) {
 			if (tracker++ == index) {
@@ -44,8 +62,8 @@ public class ShzLinkedList<T> {
 	}
 
 	//O(1)
-	public void addFirst(T t) {
-		ShzLink<T> newLink = new ShzLink<T>(t);
+	public void addHead(T t) {
+		MyDoubleLink<T> newLink = new MyDoubleLink<T>(t);
 		newLink.setNext(first);
 
 		if (isEmpty()) {
@@ -60,9 +78,9 @@ public class ShzLinkedList<T> {
 	}
 
 	//O(1)
-	public boolean addLast(T t) {
+	public boolean addTail(T t) {
 
-		ShzLink<T> newLink = new ShzLink<T>(t);
+		MyDoubleLink<T> newLink = new MyDoubleLink<T>(t);
 		newLink.setPrevious(last);
 
 		if (isEmpty()) {
@@ -79,7 +97,7 @@ public class ShzLinkedList<T> {
 	}
 
 	//O(1)
-	public boolean deleteFirst() {
+	public boolean deleteHead() {
 		if (isEmpty()) {
 			return false;
 		}
@@ -98,7 +116,7 @@ public class ShzLinkedList<T> {
 	}
 
 	//O(1)
-	public boolean deleteLast() {
+	public boolean deleteTail() {
 		if (isEmpty()) {
 			return false;
 		}
@@ -124,7 +142,7 @@ public class ShzLinkedList<T> {
 			return contains;
 		}
 
-		ShzLink<T> current = first;
+		MyDoubleLink<T> current = first;
 		while (current != null) {
 			contains = current.getData().equals(data);
 			if (contains) {
@@ -144,7 +162,7 @@ public class ShzLinkedList<T> {
 	@Override
 	public String toString() {
 		StringBuilder value = new StringBuilder();
-		ShzLink<T> current = first;
+		MyDoubleLink<T> current = first;
 		while (current != null) {
 			value.append(current.getData());
 			current = current.getNext();
@@ -153,6 +171,11 @@ public class ShzLinkedList<T> {
 			}
 		}
 		return value.toString();
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new MyLinkedListIterator<T>(first);
 	}
 
 }

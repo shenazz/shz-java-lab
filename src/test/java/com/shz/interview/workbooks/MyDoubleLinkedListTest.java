@@ -13,13 +13,13 @@ import org.junit.jupiter.api.Test;
  * @author shenazz
  *
  */
-public class ShzLinkedListTest {
+public class MyDoubleLinkedListTest {
 
 	@Test
 	public void given_emptyList_when_isEmpty() {
 
 		//given
-		ShzLinkedList<String> list = new ShzLinkedList<>();
+		MyDoubleLinkedList<String> list = new MyDoubleLinkedList<>();
 
 		//when
 		boolean result = list.isEmpty();
@@ -34,8 +34,8 @@ public class ShzLinkedListTest {
 	public void given_nonEmptyList_when_isEmpty() {
 
 		//given
-		ShzLinkedList<String> list = new ShzLinkedList<>();
-		list.addFirst("hello");
+		MyDoubleLinkedList<String> list = new MyDoubleLinkedList<>();
+		list.addHead("hello");
 
 		//when
 		boolean result = list.isEmpty();
@@ -50,10 +50,10 @@ public class ShzLinkedListTest {
 	public void given_nonEmptyList_when_toString() {
 
 		//given
-		ShzLinkedList<String> list = new ShzLinkedList<>();
-		list.addFirst("A");
-		list.addFirst("b");
-		list.addFirst("1");
+		MyDoubleLinkedList<String> list = new MyDoubleLinkedList<>();
+		list.addHead("A");
+		list.addHead("b");
+		list.addHead("1");
 
 		//when
 		String result = list.toString();
@@ -63,11 +63,11 @@ public class ShzLinkedListTest {
 		assertEquals(3, list.getSize());
 
 		//given
-		list = new ShzLinkedList<>();
-		list.addLast("b");
-		list.addFirst("A");
-		list.addFirst("1");
-		list.addLast("C");
+		list = new MyDoubleLinkedList<>();
+		list.addTail("b");
+		list.addHead("A");
+		list.addHead("1");
+		list.addTail("C");
 
 		//when
 		result = list.toString();
@@ -82,9 +82,9 @@ public class ShzLinkedListTest {
 	public void given_listWithNullValues_when_toString() {
 
 		//given
-		ShzLinkedList<String> list = new ShzLinkedList<>();
-		list.addFirst(null);
-		list.addFirst(null);
+		MyDoubleLinkedList<String> list = new MyDoubleLinkedList<>();
+		list.addHead(null);
+		list.addHead(null);
 
 		//when
 		String result = list.toString();
@@ -99,13 +99,13 @@ public class ShzLinkedListTest {
 	public void given_nonEmptyList_when_deleteFirst() {
 
 		//given
-		ShzLinkedList<String> list = new ShzLinkedList<>();
-		list.addFirst("A");
-		list.addFirst("b");
-		list.addFirst("c");
+		MyDoubleLinkedList<String> list = new MyDoubleLinkedList<>();
+		list.addHead("A");
+		list.addHead("b");
+		list.addHead("c");
 
 		//when
-		boolean result = list.deleteFirst();
+		boolean result = list.deleteHead();
 
 		//then
 		assertTrue(result);
@@ -117,10 +117,10 @@ public class ShzLinkedListTest {
 	public void given_emptyList_when_deleteFirst() {
 
 		//given
-		ShzLinkedList<String> list = new ShzLinkedList<>();
+		MyDoubleLinkedList<String> list = new MyDoubleLinkedList<>();
 
 		//when
-		boolean result = list.deleteFirst();
+		boolean result = list.deleteHead();
 
 		//then
 		assertFalse(result);
@@ -132,10 +132,10 @@ public class ShzLinkedListTest {
 	public void given_nonEmptyList_when_contains() {
 
 		//given
-		ShzLinkedList<String> list = new ShzLinkedList<>();
-		list.addFirst("A");
-		list.addFirst("b");
-		list.addFirst("1");
+		MyDoubleLinkedList<String> list = new MyDoubleLinkedList<>();
+		list.addHead("A");
+		list.addHead("b");
+		list.addHead("1");
 
 		//when
 
@@ -150,10 +150,10 @@ public class ShzLinkedListTest {
 	public void given_nonEmptyList_when_getFirst() {
 
 		//given
-		ShzLinkedList<String> list = new ShzLinkedList<>();
-		list.addFirst("A");
-		list.addFirst("b");
-		list.addFirst("1");
+		MyDoubleLinkedList<String> list = new MyDoubleLinkedList<>();
+		list.addHead("A");
+		list.addHead("b");
+		list.addHead("1");
 
 		//when
 
@@ -169,22 +169,22 @@ public class ShzLinkedListTest {
 	public void given_nonEmptyList_when_delete() {
 
 		//given
-		ShzLinkedList<String> list = new ShzLinkedList<>();
-		list.addLast("2");
-		list.addFirst("A");
-		list.addFirst("b");
-		list.addFirst("c");
-		list.addLast("1");
+		MyDoubleLinkedList<String> list = new MyDoubleLinkedList<>();
+		list.addTail("2");
+		list.addHead("A");
+		list.addHead("b");
+		list.addHead("c");
+		list.addTail("1");
 
 		//when
-		boolean result = list.deleteFirst();
+		boolean result = list.deleteHead();
 
 		//then
 		assertTrue(result);
 		assertEquals(4, list.getSize());
 		assertEquals("b,A,2,1", list.toString());
 
-		result = list.deleteLast();
+		result = list.deleteTail();
 
 		//then
 		assertTrue(result);
@@ -192,26 +192,45 @@ public class ShzLinkedListTest {
 		assertEquals("b,A,2", list.toString());
 
 		//when
-		list = new ShzLinkedList<>();
-		list.addLast("2");
+		list = new MyDoubleLinkedList<>();
+		list.addTail("2");
 
 		//when
-		result = list.deleteFirst();
+		result = list.deleteHead();
 
 		//then
 		assertTrue(result);
 		assertEquals(0, list.getSize());
 
 		//when
-		list = new ShzLinkedList<>();
-		list.addFirst("2");
+		list = new MyDoubleLinkedList<>();
+		list.addHead("2");
 
 		//when
-		result = list.deleteLast();
+		result = list.deleteTail();
 
 		//then
 		assertTrue(result);
 		assertEquals(0, list.getSize());
+
+	}
+
+	@Test
+	public void given_nonEmptyList_when_iterate() {
+		//given
+		MyDoubleLinkedList<String> list = new MyDoubleLinkedList<>();
+		list.addTail("2");
+		list.addHead("A");
+		list.addHead("b");
+		list.addHead("c");
+		list.addTail("1");
+
+		StringBuilder builder = new StringBuilder();
+		for (String entry : list) {
+			builder.append(entry);
+		}
+
+		assertEquals("cbA21", builder.toString());
 
 	}
 
