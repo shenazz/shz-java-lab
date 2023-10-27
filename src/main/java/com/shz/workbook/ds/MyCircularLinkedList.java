@@ -3,10 +3,12 @@
  */
 package com.shz.workbook.ds;
 
+import java.util.Iterator;
+
 /**
  * Singly linked circular list
  */
-public class MyCircularLinkedList<T> {
+public class MyCircularLinkedList<T> implements Iterable<T> {
 
 	private MyLink<T> first;
 
@@ -16,6 +18,25 @@ public class MyCircularLinkedList<T> {
 
 	public boolean isEmpty() {
 		return first == null;
+	}
+
+	//O(n)
+	public T get(int index) {
+		T value = null;
+
+		if (index >= size) {
+			throw new IndexOutOfBoundsException("Out of bound!");
+		}
+
+		MyLink<T> current = first;
+		for (int i = 0; i < size; i++) {
+			if (i == index) {
+				return current.getData();
+			}
+
+			current = current.getNext();
+		}
+		return value;
 	}
 
 	//O(1)
@@ -35,7 +56,7 @@ public class MyCircularLinkedList<T> {
 		size++;
 	}
 
-	public boolean remove(int index) {
+	public void remove(int index) {
 
 		if (index >= size) {
 			throw new IndexOutOfBoundsException("Out of bound!");
@@ -49,11 +70,12 @@ public class MyCircularLinkedList<T> {
 					previous.setNext(current.getNext());
 				} else if (size == 1) {
 					first = null;
+					last = null;
 				} else {
 					first = current.getNext();
+					last.setNext(first);
 				}
 
-				last.setNext(first);
 			} else {
 				previous = current;
 				current = current.getNext();
@@ -61,8 +83,6 @@ public class MyCircularLinkedList<T> {
 		}
 
 		size--;
-
-		return true;
 
 	}
 
@@ -90,6 +110,11 @@ public class MyCircularLinkedList<T> {
 	//O(1)
 	public int getSize() {
 		return size;
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new MyCircularListIterator<>(size, first);
 	}
 
 }

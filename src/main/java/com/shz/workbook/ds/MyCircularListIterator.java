@@ -10,15 +10,20 @@ import java.util.Iterator;
  */
 public class MyCircularListIterator<T> implements Iterator<T> {
 
-	private MyDoubleLink<T> current;
+	private MyLink<T> current;
 
-	public MyCircularListIterator(MyDoubleLink<T> current) {
+	private int size;
+
+	private int currentIndex;
+
+	public MyCircularListIterator(int size, MyLink<T> current) {
+		this.size = size;
 		this.current = current;
 	}
 
 	@Override
 	public boolean hasNext() {
-		return current != null;
+		return currentIndex < size;
 	}
 
 	@Override
@@ -26,6 +31,8 @@ public class MyCircularListIterator<T> implements Iterator<T> {
 		if (current == null) {
 			throw new IllegalStateException("Iterator is empty");
 		}
+
+		currentIndex++;
 
 		T data = current.getData();
 

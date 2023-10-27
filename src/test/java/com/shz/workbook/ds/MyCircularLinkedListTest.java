@@ -4,12 +4,9 @@
 package com.shz.workbook.ds;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
-
-import com.shz.workbook.ds.MyCircularLinkedList;
 
 /**
  * @author shenazz
@@ -54,14 +51,12 @@ public class MyCircularLinkedListTest {
 		list.add("A");
 
 		//when
-		boolean result = list.remove(0);
+		list.remove(0);
 
 		//then
-		assertTrue(result);
 		assertEquals(0, list.getSize());
 		assertEquals("", list.toString());
 
-		
 		//given
 		list = new MyCircularLinkedList<>();
 		list.add("A");
@@ -69,13 +64,12 @@ public class MyCircularLinkedListTest {
 		list.add("C");
 
 		//when
-		result = list.remove(0);
+		list.remove(0);
 
 		//then
-		assertTrue(result);
 		assertEquals(2, list.getSize());
 		assertEquals("B,A", list.toString());
-		
+
 		//given
 		list = new MyCircularLinkedList<>();
 		list.add("A");
@@ -83,14 +77,12 @@ public class MyCircularLinkedListTest {
 		list.add("C");
 
 		//when
-		result = list.remove(1);
+		list.remove(1);
 
 		//then
-		assertTrue(result);
 		assertEquals(2, list.getSize());
 		assertEquals("C,A", list.toString());
-		
-		
+
 		//given
 		list = new MyCircularLinkedList<>();
 		list.add("A");
@@ -98,13 +90,81 @@ public class MyCircularLinkedListTest {
 		list.add("C");
 
 		//when
-		result = list.remove(2);
+		list.remove(2);
 
 		//then
-		assertTrue(result);
 		assertEquals(2, list.getSize());
 		assertEquals("C,B", list.toString());
 
+	}
+
+	@Test
+	public void given_circularList_when_iterate() {
+		//given
+		MyCircularLinkedList<String> list = new MyCircularLinkedList<>();
+		list.add("2");
+		list.add("A");
+		list.add("b");
+		list.add("c");
+		list.add("1");
+
+		//when
+		StringBuilder builder = new StringBuilder();
+		for (String entry : list) {
+			builder.append(entry);
+		}
+
+		//then
+		assertEquals("1cbA2", builder.toString());
+
+		//given
+		list = new MyCircularLinkedList<>();
+
+		//when
+		builder = new StringBuilder();
+		for (String entry : list) {
+			builder.append(entry);
+		}
+
+		//then
+		assertEquals("", builder.toString());
+
+	}
+
+	@Test
+	public void given_circularList_when_get() {
+		//given
+		MyCircularLinkedList<String> list = new MyCircularLinkedList<>();
+		list.add("2");
+		list.add("A");
+		list.add("b");
+
+		//when
+		String result = list.get(0);
+
+		//then
+		assertEquals("b", result);
+
+		//when
+		result = list.get(1);
+
+		//then
+		assertEquals("A", result);
+
+		//when
+		result = list.get(2);
+
+		//then
+		assertEquals("2", result);
+
+		//when
+		try {
+			result = list.get(3);
+			fail();
+		} catch (Exception e) {
+			//then
+			// expected
+		}
 
 	}
 

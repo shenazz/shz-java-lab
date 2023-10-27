@@ -9,8 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import com.shz.workbook.ds.MyDoubleLinkedList;
-
 /**
  * @author shenazz
  *
@@ -236,12 +234,26 @@ public class MyDoubleLinkedListTest {
 		list.addHead("c");
 		list.addTail("1");
 
+		//when
 		StringBuilder builder = new StringBuilder();
 		for (String entry : list) {
 			builder.append(entry);
 		}
 
+		//then
 		assertEquals("cbA21", builder.toString());
+
+		//given
+		list = new MyDoubleLinkedList<>();
+
+		//when
+		builder = new StringBuilder();
+		for (String entry : list) {
+			builder.append(entry);
+		}
+
+		//then
+		assertEquals("", builder.toString());
 
 	}
 
