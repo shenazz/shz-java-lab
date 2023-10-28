@@ -23,7 +23,7 @@ public class JosephusProblemTest {
 
 		//when
 		try {
-			JosephusProblem.getSurvivor(circleSize, steps);
+			JosephusProblem.solution1(circleSize, steps);
 			fail();
 		} catch (Exception e) {
 			//then
@@ -41,7 +41,7 @@ public class JosephusProblemTest {
 
 		//when
 		try {
-			JosephusProblem.getSurvivor(circleSize, steps);
+			JosephusProblem.solution1(circleSize, steps);
 			fail();
 		} catch (Exception e) {
 			//then
@@ -59,7 +59,7 @@ public class JosephusProblemTest {
 
 		//when
 		try {
-			JosephusProblem.getSurvivor(circleSize, steps);
+			JosephusProblem.solution1(circleSize, steps);
 			fail();
 		} catch (Exception e) {
 			//then
@@ -76,7 +76,7 @@ public class JosephusProblemTest {
 		int steps = 3;
 
 		//when
-		int result = JosephusProblem.getSurvivor(circleSize, steps);
+		int result = JosephusProblem.solution1(circleSize, steps);
 
 		//then
 		assertEquals(4, result);
@@ -91,7 +91,7 @@ public class JosephusProblemTest {
 		int steps = 4;
 
 		//when
-		int result = JosephusProblem.getSurvivor(circleSize, steps);
+		int result = JosephusProblem.solution1(circleSize, steps);
 
 		//then
 		assertEquals(2, result);
@@ -106,7 +106,7 @@ public class JosephusProblemTest {
 		int steps = 10;
 
 		//when
-		int result = JosephusProblem.getSurvivor(circleSize, steps);
+		int result = JosephusProblem.solution1(circleSize, steps);
 
 		//then
 		assertEquals(5, result);
